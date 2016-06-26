@@ -42,6 +42,7 @@ class Ui_MainWindow(object):
         self.InputMiu.setInputMethodHints(QtCore.Qt.ImhPreferNumbers)
         self.InputMiu.setText(_fromUtf8(""))
         self.InputMiu.setObjectName(_fromUtf8("InputMiu"))
+        self.InputMiu.setInputMask('999999999')
         self.miu = QtGui.QLabel(self.centralwidget)
         self.miu.setEnabled(True)
         self.miu.setGeometry(QtCore.QRect(50, 100, 91, 21))
@@ -73,6 +74,7 @@ class Ui_MainWindow(object):
         self.InputLambda.setMouseTracking(True)
         self.InputLambda.setText(_fromUtf8(""))
         self.InputLambda.setObjectName(_fromUtf8("InputLambda"))
+        self.InputLambda.setInputMask('999999999')
         self.miu_3 = QtGui.QLabel(self.centralwidget)
         self.miu_3.setEnabled(True)
         self.miu_3.setGeometry(QtCore.QRect(40, 316, 91, 21))
@@ -94,6 +96,7 @@ class Ui_MainWindow(object):
         self.InputServers.setMouseTracking(True)
         self.InputServers.setText(_fromUtf8(""))
         self.InputServers.setObjectName(_fromUtf8("InputServers"))
+        self.InputServers.setInputMask('999')
         self.label = QtGui.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(20, 20, 341, 51))
         font = QtGui.QFont()
@@ -423,6 +426,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.botonReset.setFont(font)
         self.botonReset.setObjectName(_fromUtf8("botonReset"))
+        self.botonReset.clicked.connect(self.reset_values)
         self.line_3 = QtGui.QFrame(self.centralwidget)
         self.line_3.setGeometry(QtCore.QRect(0, 540, 1181, 16))
         self.line_3.setFrameShape(QtGui.QFrame.HLine)
@@ -446,7 +450,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Simulación de linea de espera", None))
         self.miu.setText(_translate("MainWindow", "μ = ", None))
         self.miu_2.setText(_translate("MainWindow", "λ =", None))
         self.miu_3.setText(_translate("MainWindow", "D =", None))
@@ -494,8 +498,51 @@ class Ui_MainWindow(object):
 "  ", None))
         self.label_4.setText(_translate("MainWindow", "=", None))
         self.label_6.setText(_translate("MainWindow", "Simulación de sistema", None))
-        self.errorLabel.setText(_translate("MainWindow", "Error!", None))
+        self.errorLabel.setText(_translate("MainWindow", "", None))  ##ERROR ESCONDIDO
         self.botonReset.setText(_translate("MainWindow", "Reset", None))
+
+
+
+
+
+    '''
+    ######################################################
+    GENERADO POR LA HERRAMIENTA!    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ######################################################
+    '''
+
+    #Funciones de la clase::::
+    def reset_values(self, MainWindow):
+        self.outputP0.setText('')
+        self.outputL.setText('')
+        self.outputW.setText('')
+        self.outputLq.setText('')
+        self.outputWq.setText('')
+        self.outputRO.setText('')
+
+        self.InputLambda.setText('')
+        self.InputMiu.setText('')
+        self.InputServers.setText('')
+
+        # TODO: Agregar funciones o destruir objetos de figura
+
+
+
+
+    def my_textChanged(self, MainWindow):
+        pass
+
+
+
+
+    #def set_error_label():
+    #     if not self.InputMiu.hasAcceptableInput(self):
+    #         errorLabel.setText("Reescriba Miu")
+    #     if not self.InputLambda.hasAcceptableInput:
+    #         errorLabel.setText("Reescriba Lambda")
+    #     if not self.InputMiu.hasAcceptableInput(self) and not self.InputLambda.hasAcceptableInput(self):
+    #         errorLabel.setText("Reescriba Miu y lambda, solo numeros")
+
 
 
 if __name__ == "__main__":

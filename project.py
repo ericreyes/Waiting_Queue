@@ -497,3 +497,13 @@ class Ui_MainWindow(object):
         self.errorLabel.setText(_translate("MainWindow", "Error!", None))
         self.botonReset.setText(_translate("MainWindow", "Reset", None))
 
+
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    MainWindow = QtGui.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
+

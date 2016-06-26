@@ -1,10 +1,12 @@
 # Waiting_Queue
 A cuantitive methods project.
 
-
 1 file for the QT designer tool   `WQ.io`
-
 and the other for the executable file `project.py`
+
+
+
+![alt tag](https://drive.google.com/file/d/0Byk1gTP3_ESFZTV1V2xqem40dU0/view?usp=sharing)
 
 I made it easy to understand the variables:
 

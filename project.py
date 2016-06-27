@@ -508,12 +508,27 @@ class Ui_MainWindow(object):
 
 
     '''
-    ######################################################
+    ############################################################################################################
     GENERADO POR LA HERRAMIENTA!    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ######################################################
+    ############################################################################################################
     '''
 
     #Funciones de la clase::::
+
+
+    def start_time():
+        # sera de la manera que manipulemos el tiempo
+        pass
+    def create_figures():
+        # USAR  estructuras de datos QUEUES para almacenar la referencia a queues. USAR THREADS PARA LOS SERVERS
+        # Crear un circulo, cada 5 segundos y agregar x posicion para cada circulo, hacia la derecha.
+        #Crear  m_servers de rectangulos, en tal posición (le sumas x a la posicion si ya hay otro .)
+        # cada cierto tiempo,
+        pass
+
+    def clear_board(self,MainWindow):
+        # Eliminar las figuras credas
+        pass
     def reset_values(self, MainWindow):
         self.outputP0.setText('')
         self.outputL.setText('')
@@ -525,13 +540,12 @@ class Ui_MainWindow(object):
         self.InputLambda.setText('')
         self.InputMiu.setText('')
         self.InputServers.setText('')
-
+        #self.clear_board()
         # TODO: Agregar funciones o destruir objetos de figura
 
 
 
     def calculate_data(self, MainWindow):
-
         miu = float(self.InputMiu.text())
         my_lambda = float(self.InputLambda.text())
         m_servers = int(self.InputServers.text())
@@ -542,7 +556,9 @@ class Ui_MainWindow(object):
             sumatoria += (1.0 / factorial(n)) * (my_lambda/miu)**n
 
         #Formulas!
-        P0 = 1.0/( sumatoria + (1.0 / factorial(m_servers)) * ((my_lambda / miu) ** m_servers) * ((m_servers*miu)/(m_servers*miu - my_lambda)))
+
+        #TODO check P0!!!!
+        P0 = 1.0/( sumatoria + (1.0 / factorial(m_servers)) * ((my_lambda / miu) ** m_servers) * ((m_servers*miu)/((m_servers*miu) - my_lambda)))
 
         L = (my_lambda * miu *(my_lambda/miu)**m_servers) / (factorial(m_servers-1) * (m_servers*miu - my_lambda)**2) * P0 + my_lambda/miu
 
@@ -553,7 +569,7 @@ class Ui_MainWindow(object):
         Wq = W - 1/miu
 
         RO = my_lambda/(m_servers* miu)
-        #TODO check P0!!!!
+
 
         self.outputP0.setText(str(P0))
         self.outputL.setText(str(L))
@@ -561,10 +577,6 @@ class Ui_MainWindow(object):
         self.outputLq.setText(str(Lq))
         self.outputWq.setText(str(Wq))
         self.outputRO.setText(str(RO))
-
-    def my_textChanged(self, MainWindow):
-        pass
-
 
 
 

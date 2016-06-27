@@ -539,10 +539,10 @@ class Ui_MainWindow(object):
         #Sumatoria para formula de P0
         sumatoria = 0
         for n in xrange(0, m_servers-1):
-            sumatoria += (1.0/factorial(n)) * (my_lambda/miu)**n
+            sumatoria += (1.0 / factorial(n)) * (my_lambda/miu)**n
 
         #Formulas!
-        P0 = 1.0/( sumatoria + (1.0/factorial(m_servers)) * ((my_lambda/miu)**m_servers) * (m_servers*miu)/(m_servers*miu - my_lambda))
+        P0 = 1.0/( sumatoria + (1.0 / factorial(m_servers)) * ((my_lambda / miu) ** m_servers) * ((m_servers*miu)/(m_servers*miu - my_lambda)))
 
         L = (my_lambda * miu *(my_lambda/miu)**m_servers) / (factorial(m_servers-1) * (m_servers*miu - my_lambda)**2) * P0 + my_lambda/miu
 
@@ -552,7 +552,7 @@ class Ui_MainWindow(object):
 
         Wq = W - 1/miu
 
-        RO = my_lambda/m_servers* miu
+        RO = my_lambda/(m_servers* miu)
         #TODO check P0!!!!
 
         self.outputP0.setText(str(P0))

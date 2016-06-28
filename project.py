@@ -518,6 +518,7 @@ class Ui_MainWindow(object):
     ############################################################################################################
     '''
 
+
     #Funciones de la clase::::
 
 
@@ -542,13 +543,12 @@ class Ui_MainWindow(object):
         #self.clear_board()
         # TODO: Agregar funciones o destruir objetos de figura
 
-
-
     def calculate_data(self, MainWindow):
         miu = float(self.InputMiu.text())
         my_lambda = float(self.InputLambda.text())
         m_servers = int(self.InputServers.text())
-
+        inqueue = 0
+        serving = 0
         #Sumatoria para formula de P0
         sumatoria = 0
 
@@ -579,7 +579,7 @@ class Ui_MainWindow(object):
         self.outputWq.setText(str(Wq))
         self.outputRO.setText(str(RO))
 
-        create_figures(miu, my_lambda, m_servers)
+        root.after(2000, update_values(my_lambda,miu,m_servers, inqueue, serving))
 
 
 
@@ -595,38 +595,48 @@ root = Tk()
 canvas = Canvas(root, width=500, height=500)
 root.withdraw()
 
-def create_figures(miu, my_lambda, m_servers):
+
+#root.after(500, add_letter)
+
+def update_values(my_lambda,miu,m_servers, inqueue, serving):
+
+    while True:
+        # Inqueue
+        inqueue += my_lambda
+        root.after(100,canvas_figuras(inqueue, serving))
+        inqueue -= (miu * m_servers)
+        root.after(100,canvas_figuras(inqueue, serving))
+
+        # Serving
+        serving += miu
+        root.after(100,canvas_figuras(inqueue, serving))
+        serving -= miu * m_servers
+        root.after(100,canvas_figuras(inqueue, serving))
+
+
+    # Llamar queue_clientes con nuevos valores
+
+def canvas_figuras(inqueue, serving):
     root.deiconify()
-    #canvas.create_oval(20,20,60,60, tags="Algo")
-    #txt = StringVar('')
-    #txt.set('0')
-    dequeueSim()
-    for i in range(0,60):
-        #lbl = Label(root, text=txt)
-        #lbl.place(x=10, y=205)
-        rect = canvas.create_rectangle(10,250,50,250-i, fill="green", tags="Lista")
-        if i >= 20 and i <= 40:
-            canvas.itemconfig(rect, fill="yellow")
-        else:
-            if i >= 41 and i <= 60:
-                canvas.itemconfig(rect, fill="red")
+    canvas.create_line(125,255,300,255, width="3", arrow="last")
+    canvas.create_rectangle(350,100,400,150)
+    canvas.create_rectangle(350,350,400,400)
+    if inqueue < 0:
+        inqueue = 0
+    rect = canvas.create_rectangle(10,275,75,275-inqueue, fill="green", tags="Lista")
+    if inqueue >= 20 and inqueue <= 74:
+        canvas.itemconfig(rect, fill="yellow")
+    else:
+        if inqueue >= 75:
+            canvas.itemconfig(rect, fill="red")
 
-
-        #txt.set('hols')
-        canvas.pack()
-        root.update()
-        canvas.delete("Lista")
-        time.sleep(0.1)
-
-def dequeueSim():
-
-    for i in xrange(0,5):
-        x1 = 60
+    for i in xrange(0,1):
+        x1 = 70
         y1 = 240
         x2 = 90
         y2 = 270
-        oval = canvas.create_oval(x1,y1,x2,y2, tags="Persona")
-        for j in xrange(0,30):
+        oval = canvas.create_oval(x1,y1,x2,y2, fill="blue", tags="Persona")
+        for j in xrange(0,20):
             x1 +=10
             x2 +=10
             canvas.coords(oval,x1, y1, x2, y2)
@@ -634,6 +644,11 @@ def dequeueSim():
             root.update()
             canvas.pack()
         canvas.delete("Persona")
+        canvas.delete("Lista")
+        #txt.set('hols')
+        canvas.pack()
+        root.update()
+        time.sleep(0.1)
 
 
 if __name__ == "__main__":

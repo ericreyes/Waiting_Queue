@@ -549,13 +549,13 @@ class Ui_MainWindow(object):
         my_lambda = float(self.InputLambda.text())
         m_servers = int(self.InputServers.text())
 
-
-
         #Sumatoria para formula de P0
         sumatoria = 0
-        for n in xrange(0, m_servers-1):
-            sumatoria += (1.0 / factorial(n)) * (my_lambda/miu)**n
 
+
+        for n in xrange(0, m_servers):
+            sumatoria = sumatoria + (1.0 / factorial(n)) * (my_lambda/miu)**n
+        print sumatoria
         #Formulas!
 
         #TODO check P0!!!!

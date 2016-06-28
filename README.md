@@ -35,31 +35,29 @@ Dicha estructura utiliza letras para representar las distribuciones de probabili
 
 Los cálculos que se pueden obtener de los modelos previamente mostrados son los siguientes:
 
-- ## P0:
+## P0:
 
 ![p0 uno](https://raw.githubusercontent.com/ericreyes/Waiting_Queue/master/1.png)
 
-- ## L:
+## L:
 
 ![L](https://raw.githubusercontent.com/ericreyes/Waiting_Queue/master/2.png)
 
-- ## W:
+## W:
 
 ![W](https://raw.githubusercontent.com/ericreyes/Waiting_Queue/master/3.png)
 
-- ## Lq:
+## Lq:
 
 ![Lq](https://raw.githubusercontent.com/ericreyes/Waiting_Queue/master/4.png)
 
-- ## Wq:
+## Wq:
 
 ![Wq](https://raw.githubusercontent.com/ericreyes/Waiting_Queue/master/5.png)
 
-- ## Rho:
+## Rho:
 
 ![Rho](https://raw.githubusercontent.com/ericreyes/Waiting_Queue/master/6.png)
-
-
 
 
 ### Datos sobre el Proyecto

@@ -10,8 +10,8 @@ from PyQt4 import QtCore, QtGui
 from math import factorial
 from Tkinter import *
 import time
-
-
+import sys
+import os
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -510,38 +510,7 @@ class Ui_MainWindow(object):
 
 
 
-
-
-    '''
-    ############################################################################################################
-    GENERADO POR LA HERRAMIENTA!    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ############################################################################################################
-    '''
-
-
     #Funciones de la clase::::
-
-
-    def start_time():
-        # sera de la manera que manipulemos el tiempo
-        pass
-
-    def clear_board(self,MainWindow):
-        # Eliminar las figuras credas
-        pass
-    def reset_values(self, MainWindow):
-        self.outputP0.setText('')
-        self.outputL.setText('')
-        self.outputW.setText('')
-        self.outputLq.setText('')
-        self.outputWq.setText('')
-        self.outputRO.setText('')
-
-        self.InputLambda.setText('')
-        self.InputMiu.setText('')
-        self.InputServers.setText('')
-        #self.clear_board()
-        # TODO: Agregar funciones o destruir objetos de figura
 
     def calculate_data(self, MainWindow):
         miu = float(self.InputMiu.text())
@@ -558,7 +527,6 @@ class Ui_MainWindow(object):
         print sumatoria
         #Formulas!
 
-        #TODO check P0!!!!
         P0 = 1.0/( sumatoria + (1.0 / factorial(m_servers)) * ((my_lambda / miu) ** m_servers) * ((m_servers*miu)/((m_servers*miu) - my_lambda)))
 
         L = (my_lambda * miu *(my_lambda/miu)**m_servers) / (factorial(m_servers-1) * (m_servers*miu - my_lambda)**2) * P0 + my_lambda/miu
@@ -581,18 +549,17 @@ class Ui_MainWindow(object):
 
         root.after(2000, update_values(my_lambda,miu,m_servers, inqueue, serving))
 
+    def reset_values(self, MainWindow):
+        root.withdraw()
+        root.after(200,os.system("python project.py"))
 
-    #def set_error_label():
-    #     if not self.InputMiu.hasAcceptableInput(self):
-    #         errorLabel.setText("Reescriba Miu")
-    #     if not self.InputLambda.hasAcceptableInput:
-    #         errorLabel.setText("Reescriba Lambda")
-    #     if not self.InputMiu.hasAcceptableInput(self) and not self.InputLambda.hasAcceptableInput(self):
-    #         errorLabel.setText("Reescriba Miu y lambda, solo numeros")
+
 
 root = Tk()
 canvas = Canvas(root, width=500, height=500)
 root.withdraw()
+
+
 
 def update_values(my_lambda,miu,m_servers, inqueue, serving):
     while True:

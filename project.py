@@ -8,6 +8,10 @@
 
 from PyQt4 import QtCore, QtGui
 from math import factorial
+from Tkinter import *
+import time
+
+
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -32,6 +36,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.InputMiu = QtGui.QLineEdit(self.centralwidget)
         self.InputMiu.setGeometry(QtCore.QRect(100, 94, 121, 31))
+
         font = QtGui.QFont()
         font.setPointSize(20)
         font.setBold(True)
@@ -519,12 +524,6 @@ class Ui_MainWindow(object):
     def start_time():
         # sera de la manera que manipulemos el tiempo
         pass
-    def create_figures():
-        # USAR  estructuras de datos QUEUES para almacenar la referencia a queues. USAR THREADS PARA LOS SERVERS
-        # Crear un circulo, cada 5 segundos y agregar x posicion para cada circulo, hacia la derecha.
-        #Crear  m_servers de rectangulos, en tal posición (le sumas x a la posicion si ya hay otro .)
-        # cada cierto tiempo,
-        pass
 
     def clear_board(self,MainWindow):
         # Eliminar las figuras credas
@@ -549,6 +548,8 @@ class Ui_MainWindow(object):
         miu = float(self.InputMiu.text())
         my_lambda = float(self.InputLambda.text())
         m_servers = int(self.InputServers.text())
+
+
 
         #Sumatoria para formula de P0
         sumatoria = 0
@@ -578,6 +579,8 @@ class Ui_MainWindow(object):
         self.outputWq.setText(str(Wq))
         self.outputRO.setText(str(RO))
 
+        create_figures(miu, my_lambda, m_servers)
+
 
 
     #def set_error_label():
@@ -588,6 +591,49 @@ class Ui_MainWindow(object):
     #     if not self.InputMiu.hasAcceptableInput(self) and not self.InputLambda.hasAcceptableInput(self):
     #         errorLabel.setText("Reescriba Miu y lambda, solo numeros")
 
+root = Tk()
+canvas = Canvas(root, width=500, height=500)
+root.withdraw()
+
+def create_figures(miu, my_lambda, m_servers):
+    root.deiconify()
+    #canvas.create_oval(20,20,60,60, tags="Algo")
+    #txt = StringVar('')
+    #txt.set('0')
+    dequeueSim()
+    for i in range(0,60):
+        #lbl = Label(root, text=txt)
+        #lbl.place(x=10, y=205)
+        rect = canvas.create_rectangle(10,250,50,250-i, fill="green", tags="Lista")
+        if i >= 20 and i <= 40:
+            canvas.itemconfig(rect, fill="yellow")
+        else:
+            if i >= 41 and i <= 60:
+                canvas.itemconfig(rect, fill="red")
+
+
+        #txt.set('hols')
+        canvas.pack()
+        root.update()
+        canvas.delete("Lista")
+        time.sleep(0.1)
+
+def dequeueSim():
+
+    for i in xrange(0,5):
+        x1 = 60
+        y1 = 240
+        x2 = 90
+        y2 = 270
+        oval = canvas.create_oval(x1,y1,x2,y2, tags="Persona")
+        for j in xrange(0,30):
+            x1 +=10
+            x2 +=10
+            canvas.coords(oval,x1, y1, x2, y2)
+            time.sleep(0.05)
+            root.update()
+            canvas.pack()
+        canvas.delete("Persona")
 
 
 if __name__ == "__main__":
@@ -598,4 +644,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-

@@ -582,7 +582,6 @@ class Ui_MainWindow(object):
         root.after(2000, update_values(my_lambda,miu,m_servers, inqueue, serving))
 
 
-
     #def set_error_label():
     #     if not self.InputMiu.hasAcceptableInput(self):
     #         errorLabel.setText("Reescriba Miu")
@@ -595,34 +594,40 @@ root = Tk()
 canvas = Canvas(root, width=500, height=500)
 root.withdraw()
 
-
-#root.after(500, add_letter)
-
 def update_values(my_lambda,miu,m_servers, inqueue, serving):
-
     while True:
         # Inqueue
         inqueue += my_lambda
-        root.after(100,canvas_figuras(inqueue, serving))
+        root.after(100,canvas_figuras(inqueue, serving, m_servers))
         inqueue -= (miu * m_servers)
-        root.after(100,canvas_figuras(inqueue, serving))
+        root.after(100,canvas_figuras(inqueue, serving, m_servers))
 
         # Serving
         serving += miu
-        root.after(100,canvas_figuras(inqueue, serving))
+        root.after(100,canvas_figuras(inqueue, serving, m_servers))
         serving -= miu * m_servers
-        root.after(100,canvas_figuras(inqueue, serving))
+        root.after(100,canvas_figuras(inqueue, serving, m_servers))
 
-
-    # Llamar queue_clientes con nuevos valores
-
-def canvas_figuras(inqueue, serving):
+def canvas_figuras(inqueue, serving, m_servers):
     root.deiconify()
+
+    #Arrow
     canvas.create_line(125,255,300,255, width="3", arrow="last")
-    canvas.create_rectangle(350,100,400,150)
-    canvas.create_rectangle(350,350,400,400)
+
+
+    # Servers
+    for x in xrange(0,m_servers):
+        y_space = (500/m_servers) * x
+        canvas.create_rectangle(350,100+ y_space,400,150 + y_space, fill="brown")
+
     if inqueue < 0:
         inqueue = 0
+
+
+    # Queue Bar
+    lblBar = Label(root, text = inqueue)
+    lblBar.place(x=25, y=280)
+    canvas.create_rectangle(10,275,75,275, fill="green")
     rect = canvas.create_rectangle(10,275,75,275-inqueue, fill="green", tags="Lista")
     if inqueue >= 20 and inqueue <= 74:
         canvas.itemconfig(rect, fill="yellow")
@@ -630,6 +635,7 @@ def canvas_figuras(inqueue, serving):
         if inqueue >= 75:
             canvas.itemconfig(rect, fill="red")
 
+    # Dequeue
     for i in xrange(0,1):
         x1 = 70
         y1 = 240

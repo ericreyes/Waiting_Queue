@@ -6,7 +6,7 @@ and the other for the executable file `project.py`
 
 
 
-![alt tag](https://drive.google.com/file/d/0Byk1gTP3_ESFZTV1V2xqem40dU0/view?usp=sharing)
+![alt tag](https://github.com/ericreyes/Waiting_Queue/blob/master/pic.png?raw=true)
 
 I made it easy to understand the variables:
 
